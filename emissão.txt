@@ -1,4 +1,6 @@
-CPF=150,00
-Nome=milena
-CPF=150
-Nome=milenq
+Código=123
+Nome=m
+Pagamento=m
+Código=124
+Nome=t
+Pagamento=120

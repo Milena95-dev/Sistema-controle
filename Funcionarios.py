@@ -4,7 +4,7 @@ def cadastrar_funcionario():
     try:
       novo_codigo = input("Digite o novo Código de funcionário: ")
       novo_nome = input("Digite o novo nome: ")
-      with open("funcionarios.txt", 'r+') as arquivo:
+      with open("emissão.txt", 'r+') as arquivo:
           linhas = arquivo.readlines()
           for linha in linhas:
               if linha.casefold() == 'Código={}\n'.format(novo_codigo).casefold():
@@ -14,7 +14,7 @@ def cadastrar_funcionario():
           linhas.append("Código={}\n".format(novo_codigo))
           linhas.append("Nome={}\n".format(novo_nome))
 
-          arquivo = open("funcionarios.txt", 'w')
+          arquivo = open("emissão.txt", 'w')
           arquivo.writelines(linhas)
           print('cadastro feito!')
           return
@@ -24,7 +24,7 @@ def cadastrar_funcionario():
 
 def buscar_funcionario(codigo):
     try:
-        with open("funcionarios.txt", 'r') as arquivo:
+        with open("emissão.txt", 'r') as arquivo:
             linhas = arquivo.readlines()
             for linha in linhas:
                 if linha.casefold() == 'Código={}\n'.format(codigo).casefold():
@@ -32,7 +32,7 @@ def buscar_funcionario(codigo):
                     print(linha)
                     print(linhas[pos + 1])
                     arquivo.close()
-            return
+                    return
             print('Funcionario não encontrado')
     except IOError as error:
         print("ERRO:", error)
@@ -40,7 +40,7 @@ def buscar_funcionario(codigo):
 
 def editar_funcionario(codigo):
     try:
-        with open("funcionarios.txt", 'r+') as arquivo:
+        with open("emissão.txt", 'r+') as arquivo:
             linhas = arquivo.readlines()
             for linha in linhas:
                 if linha.casefold() == 'Código={}\n'.format(codigo).casefold():
@@ -54,7 +54,7 @@ def editar_funcionario(codigo):
                     linhas.append("Código={}\n".format(novo_codigo))
                     linhas.append("Nome={}\n".format(novo_nome))
 
-                    arquivo = open("funcionarios.txt", 'w')
+                    arquivo = open("emissão.txt", 'w')
                     arquivo.writelines(linhas)
                     print("Funcionário alterado!")
                     return
@@ -65,7 +65,7 @@ def editar_funcionario(codigo):
 
 def excluir_funcionario(codigo):
     try:
-        with open("funcionarios.txt", 'r+') as arquivo:
+        with open("emissão.txt", 'r+') as arquivo:
             linhas = arquivo.readlines()
             for linha in linhas:
                 if linha.casefold() == 'Código={}\n'.format(codigo).casefold():
@@ -73,7 +73,7 @@ def excluir_funcionario(codigo):
                     linhas.pop(pos)
                     linhas.pop(pos)
 
-                    arquivo = open("funcionarios.txt", 'w')
+                    arquivo = open("emissão.txt", 'w')
                     arquivo.writelines(linhas)
                     print("Funcionário excluído")
                     arquivo.close()
@@ -84,7 +84,7 @@ def excluir_funcionario(codigo):
 
 def copia_dados_dos_funcionario():
     try:
-        arquivo1funcionarios = open('funcionarios.txt', 'r')
+        arquivo1funcionarios = open('emissão.txt', 'r')
         arquivo2funcionarios = open('cópia_de_dados_dos_funcionarios.txt', 'w')
         for texto in arquivo1funcionarios:
             arquivo2funcionarios.writelines(texto)

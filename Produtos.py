@@ -31,7 +31,7 @@ def buscar_produto(codigo):
                     pos = linhas.index(linha)
                     print(linha)
                     print(linhas[pos + 1])
-            return
+                    return
             print('Produto não encontrado para busca')
     except IOError as error:
         print("ERRO:", error)

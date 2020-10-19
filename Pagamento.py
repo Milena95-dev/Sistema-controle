@@ -1,47 +1,42 @@
-pagamento = 0
+
+
 def cadastrar_pagamento():
     try:
-      pagamento = input("Digite a quantia de pagamento: ")
-      cliente_nome = input("Nome do cliente para nota fiscal: ")
-      with open("emissão.txt", 'r+') as arquivo:
-          linhas = arquivo.readlines()
-          for linha in linhas:
-              if linha.casefold() == 'CPF={}\n'.format(pagamento).casefold():
-                  print('Já existe um cliente com o CPF {}'.format(pagamento))
-                  return
-          linhas.append("CPF={}\n".format(pagamento))
-          linhas.append("Nome={}\n".format(cliente_nome))
-          arquivo = open("emissão.txt", 'w')
-          arquivo.writelines(linhas)
-          print("Pagamento feito!")
-          arquivo.close()
+            novo_codigo = input("Digite o Código do produto: ")
+            novo_nome = input("Digite o nome do cliente: ")
+            pagamento = input("Digite o valor de pagamento: ")
+            with open("emissão.txt", 'r+') as arquivo:
+                linhas = arquivo.readlines()
+                for linha in linhas:
+                    if linha.casefold() == 'Código={}\n'.format(novo_codigo).casefold():
+                        print('Já existe um produto com o código {}'.format(novo_codigo))
+                        return
+
+                linhas.append("Código={}\n".format(novo_codigo))
+                linhas.append("Nome={}\n".format(novo_nome))
+                linhas.append("Pagamento={}\n".format(pagamento))
+                arquivo = open("emissão.txt", 'w')
+                arquivo.writelines(linhas)
+                print('Pagamento realizado!')
+                return
     except IOError as error:
-        print("ERRO:", error)
+            print("ERRO:", error)
 
 
-def consultar_pagamento(pagamento):
+def conslultar_pagamento_NF(codigo):
     try:
         with open("emissão.txt", 'r') as arquivo:
             linhas = arquivo.readlines()
             for linha in linhas:
-               if linha.casefold() == 'Pagamento={}\n'.format(pagamento).casefold():
+               if linha.casefold() == 'Código={}\n'.format(codigo).casefold():
                     pos = linhas.index(linha)
                     print(linha)
                     print(linhas[pos+1])
                     print(linhas[pos+2])
                     return
-            print('Cliente não encontrado para busca')
+            print('Pagamento não encontrado')
     except IOError as error:
         print("ERRO:", error)
 
-def emissão_nota_fiscal():
-    with open ('emissão.txt', 'r') as arquivo:
-        arquivo.readlines()
-        arquivo.close()
-    return
 
-
-cadastrar_pagamento()
-consultar_pagamento(pagamento)
-emissão_nota_fiscal()
 
